@@ -1,0 +1,63 @@
+body {
+  font-family: 'Roboto';
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+@keyframes funny-fade {
+  0% { background-color: red; }
+  25% { background-color: green; }
+  50% { background-color: black; }
+  75% { background-color: cyan; }
+  100% { background-color: blue; }
+}
+
+@keyframes subtle-fade {
+  0% { background-color: rgba(0,0,0,.1); }
+  25% { background-color: rgba(0,0,0,.2); }
+  50% { background-color: rgba(0,0,0,.3); }
+  75% { background-color: rgba(0,0,0,.4); }
+  100% { background-color: rgba(0,0,0,.5); }
+}
+
+.funny-fade {
+  animation: 3s linear 0s infinite normal both running funny-fade;
+}
+
+.subtle-fade {
+  animation: 3s linear 0s infinite normal both running subtle-fade;
+}
+
+.cute, h1, h2, h3, h4, h5 {
+  /* font-family: 'Maiden Orange'; */
+  font-family: 'Bubblegum Sans', cursive;
+  /* font-family: 'Oswald'; */
+  /* font-family: 'Tangerine'; */
+  /* font-weight: bold; */
+}
+
+.cute span:nth-child(6n+1) {color: #A3A}
+.cute span:nth-child(6n+2) {color: #F07}
+.cute span:nth-child(6n+3) {color: #AC3}
+.cute span:nth-child(6n+4) {color: #5A0}
+.cute span:nth-child(6n+5) {color: #0A7}
+.cute span:nth-child(6n+6) {color: #07A}
+
+p {
+  font: 18px/1.5 Roboto;
+}
+
+.big-card {
+  padding: 16px;
+  border: 16px dotted rgba(255,255,255,.5);
+  box-sizing: border-box;
+  height: calc((6 + 1) * 16px);
+  width: calc((32 + 1) * 16px);
+  box-shadow: 0 0 16px rgba(0,0,0,.5);
+  margin-bottom: 16px;
+}
+
+.big-card:nth-child(4n+0) {animation-delay: 0s}
+.big-card:nth-child(4n+1) {animation-delay: 1s}
+.big-card:nth-child(4n+2) {animation-delay: 2s}
+.big-card:nth-child(4n+3) {animation-delay: 3s}

@@ -1,0 +1,30 @@
+(link :rel stylesheet :href font.css)
+(link :rel stylesheet :href mdl/material.min.css)
+(link :rel stylesheet :href style.css)
+(link :rel stylesheet :href stylesheet.css)
+
+(meta :name viewport :content "width=device-width, initial-scale=1.0")
+
+(body
+ (h1 "Hello World!")
+ (h3 :class "cute"
+     (span "Welcome ") (span "to ") (span "our ") (span "place.  ")
+     (span "Hope ") (span "you ") (span "have ") (span "a ")
+     (span "pleasant ") (span "stay."))
+ (button :class "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" "Button")
+
+ (p "This is a sample web page developed merely for playing with stylesheets.")
+ (div :class "subtle-fade big-card" "")
+ (div :class "subtle-fade big-card" "")
+ (div :class "subtle-fade big-card" "")
+ (div :class "subtle-fade big-card" "")
+ (div :id "toasts")
+ (div :class page
+      (h2 "Current promos")
+      (div :class "promos")
+      )
+ )
+(template :id -toast (div :class "toast"))
+(script :src mdl/material.min.js)
+(script :src script.js)
+(script :src static-script.js)
