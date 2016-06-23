@@ -1,5 +1,3 @@
-import goog from 'goog:goog';
-
 // Turns a hyphenated string to camel-case.
 // For instance, "camel-case" -> "camelCase".
 function toCamelCase(s: string): string {
@@ -45,7 +43,7 @@ export class Util {
       el.classList.add('fade-out');
     }, 5000, c[0]);
     setTimeout(function(el: HTMLElement|null) {
-      if (!goog.isDefAndNotNull(el)) {
+      if (el.parentNode == null) {
         return;
       }
       el.parentNode.removeChild(el);
