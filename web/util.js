@@ -30,6 +30,84 @@ function getTemplates(): Object {
   return m;
 }
 
+// Template creator map.  The templates can be filled.
+function getFillableTemplates = (function() {
+  var m = Object.create(null);
+  var templateFunctions = {};
+  m.fns = templateFunctions;
+
+  const registerSpot_templateRe = new RegExp('^{{(.*)}}$');
+  var registerSpot = function(
+    spots, nd, targetField, templateExpression, templateName) {
+    var matches = templateExpression.match(registerSpot_templateRe);
+    if (matches == null) {
+      return false;
+    }
+    let [spotKey, fnName] = matches[1].split('|', 2);
+    var fillSpot = function(value) {
+      var f = m.fns[fnName];
+      if (f) {
+        value = f.call(this, value, templateName);
+      }
+      if (targetField === '') {
+        nd.textContent = value;
+      } else if (targetField.endsWith('?')) {
+        if (value) {
+          nd.setAttribute(targetField.slice(0, -1), '');
+        }
+      } else {
+        nd.setAttribute(targetField, value);
+      }
+    };
+    if (spotKey in spots) {
+      spots[spotKey].push(fillSpot);
+    } else {
+      spots[spotKey] = [fillSpot];
+    }
+    return true;
+  };
+
+  document.querySelectorAll('template').forEach(function(tpl) {
+    m['new' + toCamelCase(tpl.id)] = function() {
+      var node = document.importNode(tpl.content, true /* deep_clone */);
+      var spots = Object.create(null);
+
+      var nodeIterator = document.createNodeIterator(
+        node, NodeFilter.SHOW_ELEMENT, function() {
+          return NodeFilter.FILTER_ACCEPT;
+        });
+      var nd;
+      while (nd = nodeIterator.nextNode()) {
+        for (var kv of nd.attributes) {
+          if (registerSpot(spots, nd, kv.name, kv.value, tpl.id)) {
+            nd.removeAttribute(kv.name);
+          }
+        }
+        if (registerSpot(spots, nd.childNodes[0], '', nd.textContent, tpl.id)) {
+          nd.childNodes[0].textContent = '';
+        }
+      }
+
+      return {
+        node: node,
+        fill: function(data) {
+          for (var spotKey in data) {
+            var oo = spots[spotKey];
+            if (oo == null) {
+              continue;
+            }
+            var v = data[spotKey];
+            for (var f of oo) {
+              f.call(null, v);
+            }
+          }
+        },
+      };
+    };
+  });
+  return m;
+})();
+
 export class Util {
   constructor() {
     this.templates = getTemplates();
