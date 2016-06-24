@@ -14,8 +14,9 @@ body {
 
 @keyframes subtle-fade {
   0 { background-color: rgba(0,0,0,.1) }
-  50% { background-color: rgba(0,80,160,.1) }
-  100% { background-color: rgba(0,0,0,.2) }
+  25% { background-color: rgba(0,80,160,.1) }
+  50% { background-color: rgba(0,0,0,.2) }
+  100% { background-color: rgba(0,0,0,.1) }
 }
 
 .funny-fade {
@@ -23,7 +24,7 @@ body {
 }
 
 .subtle-fade {
-  animation: .8s ease-in-out 0s infinite alternate both running subtle-fade;
+  animation: 1.6s ease-in-out 0s infinite normal both running subtle-fade;
 }
 
 .cute, h1, h2, h3, h4, h5 {
