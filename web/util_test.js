@@ -1,4 +1,4 @@
-import 'goog:goog.testing.asserts';
+import 'goog:goog.asserts';
 import 'goog:goog.testing.jsunit';
 import 'goog:goog.testing.testSuite';
 

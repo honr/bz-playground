@@ -23,17 +23,9 @@ proto_library(
 )
 
 closure_js_library(
-  name = 'bar_js',
-  srcs = ['bar.js'],
-  deps = [
-    # ':foo_proto',
-  ],
-)
-
-closure_js_library(
   name = 'util',
   srcs = ['util.js'],
-  language = 'ECMASCRIPT6_TYPED',
+  language = 'ECMASCRIPT6_STRICT',
   deps = [
     '@io_bazel_rules_closure//closure/library',
   ],
@@ -49,7 +41,7 @@ closure_js_test(
   ],
   # size = 'small',
   pedantic = False,
-  language = 'ECMASCRIPT6_TYPED',
+  language = 'ECMASCRIPT6',
 )
 
 # closure_js_library(
@@ -62,15 +54,16 @@ closure_js_library(
   srcs = ['main.js'],
   deps = [
     ':util',
+    ':greeter',
     # ':externs',
   ],
-  language = 'ECMASCRIPT6_TYPED',
+  language = 'ECMASCRIPT6_STRICT',
 )
 
 closure_js_binary(
   name = 'script',
   deps = [':main'],
-  language = 'ECMASCRIPT5_STRICT',
+  # language = 'ECMASCRIPT5_STRICT',
   pedantic = True,
   entry_points = ['web/main'],
   defs = [
@@ -83,13 +76,22 @@ closure_js_binary(
 closure_js_library(
   name = 'greeter',
   srcs = ['greeter.js'],
-  language = 'ECMASCRIPT6_TYPED',
+  language = 'ECMASCRIPT6_STRICT',
+  deps = [
+    ':greeter_soy',
+    '@io_bazel_rules_closure//closure/library',
+  ],
+)
+
+closure_js_template_library(
+  name = 'greeter_soy',
+  srcs = ['greeter.soy'],
 )
 
 closure_js_library(
   name = 'faa',
   srcs = ['faa.js'],
-  language = 'ECMASCRIPT6_TYPED',
+  language = 'ECMASCRIPT6',
   deps = [
     ':greeter',
     '@io_bazel_rules_closure//closure/library',
@@ -123,13 +125,16 @@ closure_js_binary(
   formatting = 'PRETTY_PRINT',
 )
 
-closure_js_library(
-  name = 'byer',
-  srcs = ['byer.js'],
-  language = 'ECMASCRIPT6_TYPED',
-  # convention = 'GOOGLE',
+closure_js_test(
+  name = 'greeter_test',
+  srcs = ['greeter_test.js'],
+  pedantic = True,
+  language = 'ECMASCRIPT6',
+  html = 'empty_with_runner.html',
   deps = [
     ':greeter',
+    '@io_bazel_rules_closure//closure/library',
+    '@io_bazel_rules_closure//closure/library:testing',
   ],
 )
 
@@ -138,7 +143,6 @@ closure_js_binary(
   language = 'ES5_STRICT',
   deps = [
     ':greeter',
-    ':byer',
   ],
   debug = True,
   pedantic = True,
@@ -146,8 +150,7 @@ closure_js_binary(
   # entry_points = ['Hu'],
   # dependency_mode = 'STRICT',
   entry_points = [
-    # 'web/greeter',
-    'goog:byer',
+    'web/greeter',
   ],
 )
 

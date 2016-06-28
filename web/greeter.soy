@@ -1,0 +1,8 @@
+{namespace web.greeter_soy autoescape="strict"}
+
+/** Says hello to the world. */
+{template .greet}
+  {@param name: string}
+  <p>
+    Hello <b>{$name}</b>!
+{/template}

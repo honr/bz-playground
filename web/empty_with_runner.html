@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<body></body>
+<script>
+window.setInterval(function() {
+  if (!window.G_testRunner) {
+    console.log('ERROR: G_testRunner not defined.');
+    window.callPhantom(false);
+    return;
+  }
+  if (window.G_testRunner.isFinished()) {
+    window.callPhantom(window.G_testRunner.isSuccess());
+  }
+}, 100);
+</script>
