@@ -1,5 +1,6 @@
-import 'goog:web.greeter_soy';
 import 'goog:goog.soy';
+
+import 'goog:web.greeter_soy';
 
 export class Greeter {
   /** @param{string} name**/
