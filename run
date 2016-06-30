@@ -29,7 +29,7 @@ function fe() {
   bz build fe:fe && \
       draw-gradient-line && \
       echo && \
-      bazel-bin/web/fe "${args[@]}"
+      bazel-bin/fe/fe "${args[@]}"
 }
 
 function asciicolors() {

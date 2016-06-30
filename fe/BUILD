@@ -27,6 +27,7 @@ go_binary(
   data = [
     ':fe-style',
     ':fe-script',
+    ':js_material_lib',
   ],
 )
 
@@ -55,6 +56,15 @@ closure_js_library(
     '@io_bazel_rules_closure//closure/library',
   ],
   language = 'ECMASCRIPT6_STRICT',
+)
+
+closure_js_library(
+  name = 'js_material_lib',
+  srcs = ['js/material.js'],
+  deps = [
+    '@io_bazel_rules_closure//closure/library',
+  ],
+  language = 'ECMASCRIPT5_STRICT',
 )
 
 closure_js_template_library(
