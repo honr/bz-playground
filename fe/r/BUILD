@@ -1,3 +1,4 @@
+# Resources directory.
 package(
   default_visibility = ["//visibility:public"],
 )
@@ -19,15 +20,25 @@ closure_js_library(
   name = "main_js",
   srcs = ["main.js"],
   deps = [
-    ":main_soy",
+    ":greeter_js",
+    "@io_bazel_rules_closure//closure/library",
+  ],
+  language = "ECMASCRIPT6_STRICT",
+)
+
+closure_js_library(
+  name = "greeter_js",
+  srcs = ["greeter.js"],
+  deps = [
+    ":greeter_soy",
     "@io_bazel_rules_closure//closure/library",
   ],
   language = "ECMASCRIPT6_STRICT",
 )
 
 closure_js_template_library(
-  name = "main_soy",
-  srcs = ["main.soy"],
+  name = "greeter_soy",
+  srcs = ["greeter.soy"],
   deps = [
     ":marbles",
   ],
