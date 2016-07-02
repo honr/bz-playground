@@ -1,3 +1,7 @@
+package(
+  default_visibility = ["//visibility:public"],
+)
+
 load("@io_bazel_rules_closure//closure:defs.bzl",
      "closure_js_library",
      "closure_js_binary",
@@ -11,38 +15,28 @@ load("@io_bazel_rules_closure//closure:defs.bzl",
      "phantomjs_test",
 )
 
-load("@io_bazel_rules_go//go:def.bzl",
-     "go_library",
-     "go_binary",
-     "go_test",
+closure_css_library(
+  name = "material_css",
+  srcs = ["material.css"],
 )
 
-go_binary(
-  name = "fe",
-  srcs = ["fe.go"],
+closure_js_library(
+  name = "material_js",
+  srcs = ["material.js"],
   deps = [
-    "//github.com/honr/vulcan/htl:go_default_library",
-    "//github.com/honr/vulcan/static:go_default_library",
+    "@io_bazel_rules_closure//closure/library",
   ],
-  data = [
-    ":style",
-    ":script",
-  ],
+  language = "ECMASCRIPT5_STRICT",
 )
 
 closure_js_binary(
-  name = "script",
-  deps = ["//fe/r:main_js"],
+  name = "material",
+  deps = [":material_js"],
   # language = "ECMASCRIPT5_STRICT",
   pedantic = True,
-  entry_points = ["fe/r/main"],
+  entry_points = ["fe/r/material/material"],
   defs = [
     "--charset=UTF-8",
     "--new_type_inf",
   ],
-)
-
-closure_css_binary(
-  name = "style",
-  deps = ["//fe/r:main_css"],
 )

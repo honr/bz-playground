@@ -1,0 +1,19 @@
+{namespace r.main autoescape="strict"}
+
+{template .greet} /** Says hello to the given person. */
+  {@param name: string}
+  {@param numMarbles: number}
+  {@param xs: list<string>}
+  <p>Hello <b>{$name}</b>!
+  <button>Button</button>
+  {call r.marbles.marbles}
+    {param n: $numMarbles /}
+  {/call}
+  <ul>
+  {foreach $x in $xs}
+    <li>{$x}</li>
+  {ifempty}
+    EMPTY
+  {/foreach}
+  </ul>
+{/template}

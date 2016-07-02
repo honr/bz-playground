@@ -32,8 +32,8 @@ func main() {
 	}
 
 	for _, filename := range []string{
-		"fe-script.js",
-		"fe-style.css",
+		"script.js",
+		"style.css",
 	}{
 		h, err := static.HandlerFuncFromFile(*staticBinDir + "/" + filename, *dev)
 		if err != nil {

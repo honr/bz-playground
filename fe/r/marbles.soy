@@ -1,0 +1,17 @@
+{namespace r.marbles autoescape="strict"}
+
+{template .marbles}
+  {@param n: number}
+  <p>
+  {switch $n}
+    {case 0}
+      You have no marbles.
+    {case 1}
+      You have just one marble
+    {case 2, 3}
+      You yave a couple of marbles
+    {default}
+      You have some marbles
+  {/switch}
+  </p>
+{/template}
