@@ -4,18 +4,18 @@
 @def COLOR_D #4a1;
 @def LINEAR_GRAD_A linear-gradient(180deg, #888, COLOR_B 5%, COLOR_B) COLOR_B;
 /* @def RAINBOW_GRAD linear-gradient(red, orange, yellow, green, blue, indigo, violet); */
-@def SANS "Roboto", "Helvetica", "Arial", sans-serif;
+@def SANS "Roboto Condensed", "Helvetica", "Arial", sans-serif;
 @def MONO "PT Mono", "Droid Sans Mono", "Menlo", monospace;
+@def FONT 18px/1.5 SANS;
 @def TEXT_SHADOW 0px 1px 2px rgba(0,0,0,.3);
 
 body {
   background: LINEAR_GRAD_A;
   color: COLOR_A;
-  font: SANS;
 }
 
 body, p, input, button, table {
-  font: SANS;
+  font: FONT;
 }
 
 @defmixin button(FG, BG) {
@@ -29,6 +29,11 @@ body, p, input, button, table {
 
 button {
   @mixin button(COLOR_A, COLOR_D);
+  margin: 16px;
+}
+
+button:active {
+  @mixin button(lighten(COLOR_A, 20), COLOR_D);
 }
 
 p {

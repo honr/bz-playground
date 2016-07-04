@@ -30,9 +30,15 @@ export class Greeter {
   }
 
   /****/
+  updateName() {
+    this.name_ = 'Kenny';
+    this.greet(10, ['x']);
+  }
+
+  /****/
   run() {
     let xs = ['foo', 'bar', 'baz'];
-    for (let x of [0, 1, 2, 3, 4, 5]) {
+    for (let x of [0, 1, 2]) {
       let t = x * 1000;
       if (x % 2 === 0) {
         window.setTimeout(() => this.greet(x, xs), t);
@@ -40,5 +46,7 @@ export class Greeter {
         window.setTimeout(() => this.greetWorld(x), t);
       }
     }
+
+    window.setTimeout(() => this.updateName(), 3000);
   }
 }
